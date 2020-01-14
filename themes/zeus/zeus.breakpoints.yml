@@ -1,0 +1,12 @@
+zeus.small:
+  label: small
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+   - 1x
+zeus.notsmall:
+  label: 'not small'
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 1
+  multipliers:
+    - 1x

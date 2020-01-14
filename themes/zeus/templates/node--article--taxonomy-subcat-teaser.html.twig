@@ -1,0 +1,26 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    article_type_class ? 'article-type-' ~ article_type_class,
+  ]
+%}
+
+<article {{ attributes.addClass(classes) }} >
+  <div class="card">
+    <div class="not-image">
+      <div class="topic">{{ content.field_category }}</div>
+      <h2 class="link-node"><a href="{{ url }}">{{ label }}</a></h2>
+    </div>
+    <div class="image">
+      {# want to use blazy formatter, which doesn't support link to content #}
+      <a href="{{ url }}">
+        {{ content.field_hero_image }}
+      </a>
+    </div>
+  </div>
+</article>

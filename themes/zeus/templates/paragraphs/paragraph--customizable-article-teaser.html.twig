@@ -1,0 +1,30 @@
+{% extends 'paragraph.html.twig' %}
+
+{% block content %}
+  <div class="card">
+    <div class="row flex-row-reverse">
+      <div class="not-image col-md-6">
+        {% if paragraph.field_zeus_headline.value is not empty %}
+          <h2 class="link-node"><a href="{{ url }}">{{ content.field_zeus_headline }}</a></h2>
+        {% else %}
+          <h2 class="link-node"><a href="{{ url }}">{{ default_title }}</a></h2>
+        {% endif %}
+        {% if paragraph.field_zeus_body.value is not empty %}
+          <div class="summary">{{ content.field_zeus_body }}</div>
+        {% else %}
+          <div class="summary">{{ default_summary }}</div>
+        {% endif %}
+      </div>
+      <div class="image col-md-6">
+        {# want to use blazy formatter, which doesn't support link to content #}
+        <a href="{{ url }}">
+          {% if paragraph.field_zeus_image.target_id is not empty %}
+            {{ content.field_zeus_image}}
+          {% else %}
+            {{ default_image }}
+          {% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

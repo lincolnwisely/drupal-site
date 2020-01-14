@@ -1,0 +1,17 @@
+/* Admin Menus */
+ul.tabs.primary {
+  @include prefix(display, flex, webkit ms);
+  @include prefix(flex-direction, row, webkit ms);
+  @include prefix(justify-content, unset, webkit ms);
+  list-style: none;
+  padding: 0 15px;
+  margin-bottom: 30px;
+  li {
+    margin-right: 20px;
+  }
+
+  @include bp(sm) {
+    @include prefix(flex-wrap, wrap, webkit ms);
+    @include prefix(justify-content, center, webkit ms);
+  }
+}

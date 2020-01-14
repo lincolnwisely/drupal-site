@@ -1,0 +1,26 @@
+.paragraph--type--customizable-article-teaser {
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  h2 {
+    a {
+      font-size: 1.22rem;
+      line-height: 1.27em;
+      color: $darkgray;
+      text-decoration: none;
+      font-weight: normal;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .summary {
+    p {
+      font-size: 0.83rem;
+      line-height: 1.06rem;
+    }
+  }
+}

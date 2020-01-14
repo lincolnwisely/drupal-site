@@ -1,0 +1,148 @@
+//Holy cow, what a flexible CTA this is!
+.paragraph--type--flexible-cta {
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    font-family: $primary-font-regular;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  //some weird stuff so there's no bad overflow on mobile
+  //note the mobile-only bp
+  @include bp(xs){
+    .image {
+      padding: 0;
+    }
+    .flexible-cta-row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .container {
+      .image {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .flexible-cta-row {
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+    }
+  }
+
+  //on desktop, always use object fit cover
+  .image {
+    @include bp(sm){
+      & * {
+        //divs that are wrapping image stuff
+        height: 100%;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+        @include prefix(object-fit, cover, webkit ms o);
+      }
+    }
+  }
+  .field--name-field-link {
+    margin-top: 1rem;
+    a {
+      @extend %ppb-button;
+      display: inline-block;
+      max-width: unset;
+      width: unset;
+    }
+  }
+
+  //get padding off of nested container
+  .container .flexible-cta-text-container {
+    padding: 0;
+  }
+
+  //stuff that depends on design scheme classes
+  &.text-over-image {
+    @include bp(sm){
+      .card {
+        overflow: hidden;
+        padding: 0;
+      }
+      //the double-wide row is key to making the text-over-image design
+      //pattern really nicely responsive.
+      .flexible-cta-row {
+        max-width: none;
+        width: 200%;
+        margin: 0;
+      }
+      .not-image {
+        @include prefix(display, flex, webkit ms);
+        @include prefix(flex-direction, column, webkit ms);
+        @include prefix(justify-content, center, webkit ms);
+        @include prefix(flex, 0 1 auto, webkit ms);
+        padding-top: 2em;
+        padding-bottom: 2em;
+        color: white;
+      }
+      .image {
+        padding: 0;
+        @include prefix(transform, translateX(-100%), webkit ms);
+        z-index: -1;
+        //after element for gray overlay
+        &:after {
+          position: absolute;
+          display: block;
+          content: "";
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          top: 0;
+          left: 0;
+        }
+      }
+      .field--name-field-link {
+        a {
+          color: white;
+          border: 1px solid white;
+          &:hover {
+            color: $darkgray;
+            background-color: white;
+          }
+        }
+      }
+      .flexible-cta-text {
+        width: 60%;
+      }
+      &.text-left {
+        .flexible-cta-text {
+          text-align: left;
+          margin-left: 0;
+        }
+      }
+      //text alignment within text-over-image
+      &.text-right {
+        .flexible-cta-text {
+          //I set margin twice on purpose
+          margin: auto;
+          margin-right: 0;
+          text-align: right;
+        }
+      }
+      &.text-center {
+        .flexible-cta-text {
+          margin: auto;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &.cta-flex-row-reverse {
+    .flexible-cta-row {
+      @include prefix(flex-direction, row-reverse, webkit ms);
+    }
+  }
+
+}

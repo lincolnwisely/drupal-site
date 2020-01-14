@@ -1,0 +1,184 @@
+.paragraph--type--pdf {
+  box-shadow: 0px 2px 3px 0px #ccc;
+  @include bp(sm) {
+    box-shadow: none;
+  }
+
+  //dog ear on mobile
+  position: relative;
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid white;
+    right: -5px;
+    top: -20px;
+    position: absolute;
+    @include prefix(transform, rotate(315deg), webkit ms);
+
+    @include bp(sm) {
+      content: none;
+    }
+  }
+  &:after {
+    content: '';
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-right: 30px solid rgba(1,164,161, 1);
+    position: absolute;
+    right: 17px;
+    top: 2px;
+    @include prefix(transform, rotate(315deg), webkit ms);
+
+    @include bp(sm) {
+      content: none;
+    }
+  }
+  //end dog ear
+}
+
+.pdf-cta {
+  font-family: $primary-font-bold;
+  text-align: center;
+  @include bp(sm){
+    cursor: pointer;
+    border-top: 1px solid #9b9b9b;
+    border-bottom: 1px solid #9b9b9b;
+    margin-bottom: 20px;
+    &.hide-on-desktop {
+      display: none;
+    }
+  }
+
+  .pdf-cta-row {
+    align-items: center;
+    img {
+      //set size of paige, in here to overpower .container img selector
+      max-width: 138px;
+      width: 100%;
+    }
+  }
+
+  .field--name-field-anchor-text {
+    padding: 1rem;
+    @include bp(sm){
+      text-align: left;
+    }
+  }
+}
+
+.pdf-image {
+  margin-bottom: 0.5rem;
+}
+.pdfpreview-file {
+  box-shadow: 0px 2px 3px 0px #ccc;
+}
+.pdf-download {
+  a {
+    color: $primarygreen;
+    font-family: $primary-font-bold;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.pdf-mobile {
+  display: block;
+  margin-bottom: 20px;
+  @include bp(sm){
+    display: none !important;
+  }
+}
+
+.pdf-mobile-header {
+  font-family: $primary-font-bold;
+  color: $primarygreen;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 #ccc;
+
+  //chevron
+  .field--name-field-mobile-header:after {
+    content: '';
+    width: 0.6em;
+    height: 0.6em;
+    border-width: 0 0 0.15em 0.15em;
+    border-style: solid;
+    border-color: inherit;
+    transform-origin: 50% 50%;
+    @include prefix(transform, translateY(-20%) rotate(-45deg), webkit ms);
+    display: inline-block;
+    margin-left: 1em;
+    transition: transform 0.2s;
+  }
+  &.open {
+    color: white;
+    background-color: $primarygreen;
+
+    .field--name-field-mobile-header:after {
+      @include prefix(transform, translateY(20%) rotate(135deg), webkit ms);
+    }
+  }
+  //end chevron
+
+}
+
+.pdf-mobile-drawer {
+  display: none;
+  .field--name-field-pdf {
+    padding: 1rem;
+  }
+}
+
+.pdf-desktop {
+  display: none;
+  margin: 1rem auto;
+  border-top: 1px solid #9b9b9b;
+  padding-top: 1rem;
+  @include bp(sm){
+    display: block;
+  }
+
+  .field--name-field-desktop-header {
+    font-family: $primary-font-bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+  }
+}
+
+.field--name-field-pdf {
+  //make it a row
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+
+  //make it a col-6 col-md-4
+  & > .field__item {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1rem;
+    text-align: center;
+    @include bp(sm){
+      -ms-flex: 0 0 33.3%;
+      flex: 0 0 33.3%;
+      max-width: 33.3%;
+    }
+  }
+}

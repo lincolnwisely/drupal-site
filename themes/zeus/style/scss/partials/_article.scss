@@ -1,0 +1,417 @@
+.node--type-article.node--view-mode-full {
+  margin-bottom: 2rem;
+  @include bp(sm) {
+    margin-top: 1.5rem;
+  }
+}
+
+.page-node-type-article {
+  h1 {
+    text-align: center;
+  }
+
+  #ppb-advertorial {
+    text-align: center;
+    background-color: $primaryblue;
+    @include prefix(display, flex, webkit ms);
+    @include prefix(justify-content, center, webkit ms);
+    height: 60px;
+    margin-top: -1px;
+    a {
+      color: $white;
+      font-family: $primary-font-bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 20px 0;
+    }
+  }
+
+  .key-image {
+    img {
+      max-width: 100%;
+      height: auto;
+      @include prefix(object-fit, cover, webkit ms o);
+    }
+    @include bp(sm) {
+      margin-bottom: 50px;
+    }
+  }
+
+  .author {
+    color: $gray;
+
+    a {
+      color: $gray;
+      text-decoration: none;
+    }
+  }
+
+  .field--name-field-tags {
+    display:  inline;
+
+    a {
+      color: $darkgray;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    & > div {
+      display: inline;
+    }
+
+  }
+
+  #tags {
+    display: block;
+    font-family: $primary-font-regular;
+    color: $darkgray;
+    padding: 10px 0;
+    border-top: 1px solid $darkgray;
+
+    @include bp(sm) {
+      margin-bottom: 30px;
+    }
+  }
+
+
+  .key-image {
+    .field--name-field-hero-video {
+      img {
+        max-width: 100%;
+        height: auto;
+        max-height: unset;
+        @include prefix(object-fit, cover, webkit ms o);
+      }
+      margin-bottom: 50px;
+    }
+  }
+}
+
+//SHARING
+#block-addtoany-standard,
+#block-addtoany-business {
+  text-align: center;
+  @include bp(sm) {
+    margin-top: -10px;// Counters top padding on first icon to align block with main content and sidebar.
+  }
+}
+.a2a_kit a {
+  margin-bottom: 1rem;
+}
+
+// ARTICLE TYPES //
+#shared-src {
+  border-bottom: 2px solid $gray3;
+  text-align: center;
+  padding: 30px 0;
+}
+.field--name-field-shared-source {
+  a {
+    color: $lightgray;
+    font-family: $primary-font-italic;
+    font-size: 20px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:before {
+      content: "Source: ";
+    }
+  }
+}
+
+#shared-cta {
+  text-align: right;
+  a {
+    color: $primarygreen;
+    text-decoration: none;
+    font-family: $primary-font-bold;
+    margin-bottom: 20px;
+    display: block;
+    &:after {
+      content: '';
+      height: 20px;
+      background: url(../../images/reply.png);
+      width: 25px;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+// VIEW MODES //
+
+//SOME STUFF COMMON TO LOTS OF VIEW MODES
+//MAYBE SOMEONE HAS A BETTER WAY TO DO THIS? -DF
+.node--view-mode-primary-home-page,
+.node--view-mode-secondary-home-page,
+.node--view-mode-tertiary-home-page,
+.node--view-mode-homepage-grid-teaser,
+.node--view-mode-search-teaser,
+.node--view-mode-taxonomy-subcat-teaser,
+.node--view-mode-taxonomy-2up-subcat-teaser,
+.node--view-mode-teaser,
+.node--view-mode-menu {
+  h2 {
+    a {
+      font-size: 1.22rem;
+      line-height: 1.27em;
+      color: $darkgray;
+      text-decoration: none;
+      font-weight: normal;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .summary {
+    p {
+      font-size: 0.83rem;
+      line-height: 1.06rem;
+    }
+  }
+  //play icon
+  &.article-type-video {
+    .image {
+      a {
+        position: relative;
+        display: block;
+        min-height: 44px;
+        @include bp(sm){
+          min-height: 69px;
+        }
+      }
+      a:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 15%;
+        padding-top: 15%; //to keep it square
+        min-width: 44px;
+        min-height: 44px;
+        @include prefix(transform, translate3d(-50%, -50%, 0), webkit ms);
+        display: block;
+        background-size: contain;
+        background-position: center center;
+        background-image: url("/themes/custom/zeus/images/video_play.png");
+        @include bp(sm){
+          min-width: 69px;
+          min-height: 69px;
+        }
+      }
+    }
+    &.node--view-mode-menu {
+      .image {
+        a {
+          min-height: 45px;
+        }
+        a:after {
+          min-width: 45px;
+          min-height: 45px;
+        }
+      }
+    }
+  }
+}
+//STUFF FOR VIEW MODES THAT ANTICIPATE BEING WITHIN ROWS
+//WITH IMAGES ALIGNED AT THE BOTTOM OF THE ROW
+.node--view-mode-homepage-grid-teaser,
+.node--view-mode-search-teaser,
+.node--view-mode-taxonomy-2up-subcat-teaser,
+.node--view-mode-taxonomy-subcat-teaser,
+.view-link-in-bio .node--view-mode-teaser  {
+  height: 100%;
+  .card {
+    height: 100%;
+    @include prefix(display, flex, webkit ms);
+    @include prefix(flex-direction, column, webkit ms);
+    @include prefix(justify-content, space-between, webkit ms);
+  }
+  .image {
+    //important for IE to get rid of extra whitespace.
+    @include prefix(flex, 0 0 auto, webkit ms);
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .field--name-field-shared-source {
+    margin: 1em 0;
+  }
+}
+
+//STUFF FOR SPECIFIC VIEW MODES
+
+.node--view-mode-primary-home-page{
+  //this has lots of special desktop styles
+  @include bp(sm){
+    .card {
+      overflow: hidden;
+      padding: 0;
+    }
+    //the double-wide row is key to making the text-over-image design
+    //pattern really nicely responsive.
+    .row.double-wide {
+      max-width: none;
+      width: 200%;
+      margin: 0;
+      // flex: 1 1 0px;
+      @include prefix(flex, 1 1 0px, webkit ms);
+
+    }
+    .not-image {
+      text-align: center;
+      @include prefix(display, flex, webkit ms);
+      @include prefix(flex-direction, column, webkit ms);
+      @include prefix(justify-content, flex-end, webkit ms);
+      @include prefix(flex, 0 1 auto, webkit ms);
+
+      padding: 4em 0 1em;
+    }
+    .topic {
+      margin: 1em auto 1em;
+      a {
+        color: white;
+        font-family: $primary-font-regular;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
+    .summary {
+      max-width: 40%;
+      margin: 1em auto;
+      p {
+        color: white;
+        line-height: 1.22rem;
+      }
+    }
+    h2 {
+      margin: 0.1em auto;
+      a {
+        max-width: 75%;
+        display: inline-block;
+        margin: auto;
+        color: white;
+        text-decoration: none;
+        font-weight: normal;
+        font-size: 1.94rem;
+        line-height: 1.18em;
+      }
+    }
+    //there's cool stuff in here to make this really responsive
+    //to variable text over the image. It can grow as tall as it
+    //needs to, but it never shrinks shorter than the image wants to be.
+    //Notice that it does this without any magic numbers.
+    .image {
+      padding: 0;
+      @include prefix(transform, translateX(-100%), webkit ms);
+      z-index: -1;
+      .field {
+        //divs that are wrapping image stuff
+        height: 100%;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+        @include prefix(object-fit, cover, webkit ms o);
+      }
+      //after element for gray overlay
+      &:after {
+        position: absolute;
+        display: block;
+        content: "";
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        top: 0;
+        left: 0;
+      }
+    }
+    .media {
+      height: 100%;
+    }
+    //no play button for video on desktop?
+    //Uncomment below if play button should be hidden on desktop
+    // &.article-type-video .image a:after {
+    //   display: none;
+    // }
+  }
+}
+
+.node--view-mode-secondary-home-page {
+  @include bp(sm){
+    .image {
+      & * {
+        //make any tags that wrap the image 100% height
+        height: 100%;
+      }
+      img {
+        height: 100%;
+        @include prefix(object-fit, cover, webkit ms o);
+      }
+    }
+    h2 {
+      a {
+        font-size: 1.94rem;
+        line-height: 1.18em;
+      }
+    }
+  }
+}
+
+.node--view-mode-tertiary-home-page {
+  @include bp(sm){
+    h2 {
+      a {
+        font-size: 1.94rem;
+        line-height: 1.18em;
+      }
+    }
+  }
+}
+
+.node--view-mode-menu {
+  margin-bottom: 1rem;
+  a {
+    padding: 0 !important;
+    color: white !important;
+  }
+  h2 {
+    margin: 0 0 0.5rem;
+    span {
+      display: inline !important;
+    }
+    a {
+      font-size: 1.222rem;
+      font-family: $secondary-font-regular;
+      font-weight: $font-weight-reg;
+      margin: 0;
+    }
+  }
+  .type-text a {
+    font-size: 0.75rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.node--view-mode-teaser {
+  margin-bottom: 2rem;
+}
+.view-link-in-bio .node--view-mode-teaser {
+  padding-bottom: 3rem;
+}
+
+
+.node--view-mode-menu {
+
+}

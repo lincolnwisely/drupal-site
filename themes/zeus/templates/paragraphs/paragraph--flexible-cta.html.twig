@@ -1,0 +1,19 @@
+{% extends 'paragraph.html.twig' %}
+
+{% block content %}
+  <div class="card">
+    <div class="row flexible-cta-row">
+      <div class="not-image col-md-6">
+        <div class="container flexible-cta-text-container">
+          <div class="flexible-cta-text">
+            {{ content.field_zeus_body }}
+            {{ content.field_link }}
+          </div>
+        </div>
+      </div>
+      <div class="image col-md-6">
+        {{ content.field_zeus_image }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

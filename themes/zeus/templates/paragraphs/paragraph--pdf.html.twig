@@ -1,0 +1,36 @@
+{% extends 'paragraph.html.twig' %}
+
+{% block content %}
+  <div class="paragraph-content">
+    <div class="pdf-cta {% if hide_on_desktop %}hide-on-desktop{% endif %}" data-pid="{{ paragraph.id() }}">
+      <div class="row pdf-cta-row">
+        <div class="col-md-3">
+          <img src="/themes/custom/zeus/images/paige-arms-up.png" />
+        </div>
+        <div class="col-md-9">
+          {{ content.field_anchor_text }}
+        </div>
+      </div>
+    </div>
+    <div class="pdf-mobile">
+      <div class="pdf-mobile-header">
+        {% if paragraph.field_mobile_header.value is empty %}
+          {% trans %}View Templates to Print{% endtrans %}
+        {% else %}
+          {{ content.field_mobile_header}}
+        {% endif %}
+      </div>
+      <div class="pdf-mobile-drawer">
+        {{ content.field_pdf }}
+      </div>
+    </div>
+    {#
+     # The desktop div will get moved to the bottom of the article
+     # The 'hidden' attribute will be removed when that happens
+     #}
+    <div hidden class="pdf-desktop" id="pdf-{{ paragraph.id() }}">
+      {{ content.field_desktop_header }}
+      {{ content.field_pdf }}
+    </div>
+  </div>
+{% endblock %}

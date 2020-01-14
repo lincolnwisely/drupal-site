@@ -1,0 +1,32 @@
+{%
+  set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+  ]
+%}
+<div{{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
+  <div class="content">
+    <div class="card">
+      <div class="row double-wide no-gutters">
+        <div class="not-image col-md-6">
+          <div class="container">
+            <div class="headline-wrapper {{ alignment }}">
+            {% if content.half_width_headline[0]['#markup'] == 'On' %}
+              <div class="headline half-width">
+                <h1>{{ content.field_headline}}</h1>
+            {% else %}
+              <div class="headline">
+                <h1>{{ content.field_headline }}</h1>
+            {% endif %}
+              </div>
+              {{ content.field_subhead }}
+            </div>
+          </div>
+        </div>
+        <div class="image col-md-6">
+          {{ content.hero_image }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

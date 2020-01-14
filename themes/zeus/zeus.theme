@@ -1,0 +1,294 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Zeus custom theme.
+ */
+use Drupal\Component\Utility\Html;
+use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\node\Entity\Node;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
+use Drupal\views\Views;
+use Drupal\Core\Url;
+// use Drupal\taxonomy\TermInterface;
+// use Drupal\taxonomy_menu\TaxonomyMenuInterface;
+
+// Autoplay video once the thumbnail is clicked
+function zeus_preprocess_video_embed_iframe__youtube(&$variables) {
+  $variables['query']['autoplay'] = '1';
+}
+
+
+function zeus_preprocess_menu__main(&$variables){
+
+  foreach ($variables['items'] as &$item) {
+    $term_name = $item['title'];
+    $query = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', 'categories')
+      ->condition('name', $term_name);
+
+    $tids = $query->execute();
+    if( !empty($tids)) {
+      $item['tid'] = reset($tids);
+      $item['field_headline'] = \Drupal\taxonomy\Entity\Term::load($item['tid'])->get('field_headline')->value;
+    }
+  }
+}
+
+function zeus_preprocess_node(&$variables){
+  $node = $variables['node'];
+  switch ($node->getType()){
+    case 'home_page':
+      //Make the views
+      $exclude = zeus_homepage_get_exclude($node);
+      $cat_articles = zeus_get_homepage_cat_articles($node, $exclude);
+      $exclude = array_merge($cat_articles, $exclude);
+      $variables['top_grid'] = zeus_home_page_grid($cat_articles, 0);
+      $variables['bottom_grid'] = zeus_home_page_grid($cat_articles, 3);
+      $variables['exclude'] = implode('+', $exclude);
+      break;
+    case 'article':
+      if(isset($node->field_article_type->target_id)){
+        $article_type_name = Term::load($node->field_article_type->target_id)->getName();
+        $variables['article_type_class'] = Html::cleanCssIdentifier(strtolower($article_type_name));
+      }
+      if($variables['view_mode'] == 'full'){
+        $shared_src = $node->field_shared_source->getValue();
+        if(!empty($shared_src)){
+          $uri = $node->field_shared_source->getValue()[0]['uri'];
+          $url = Url::fromUri($uri);
+          $variables['shared_src'] = [
+            '#type' => 'link',
+            '#title' => t('Go to article'),
+            '#url' => $url,
+            '#options' => array(),
+            '#attributes' => [
+              'target' => [
+                '_blank',
+              ],
+            ],
+          ];
+        }
+      }
+      break;
+  }
+}
+/**
+ * Implements hook_preprocess_block
+ */
+function zeus_preprocess_block(&$variables){
+  if ($variables['elements']['#id'] == 'contact_form_intro'){
+    $variables['attributes']['class'][] = 'container';
+  }
+}
+
+function zeus_preprocess_block__footertop(&$variables){
+  $icons = [
+    'facebook',
+    'twitter',
+    'instagram',
+    'pinterest',
+    'youtube',
+    'linkedin',
+  ];
+  foreach($icons as $icon){
+    $renderable = ['#theme' => 'ppb_' . $icon];
+    $variables[$icon] = \Drupal::service('renderer')->render($renderable);
+  }
+}
+
+/**
+ * Find nids already selected a featured content on homepage.
+ */
+function zeus_homepage_get_exclude($node){
+  $exclude = array();
+  if(isset($node->field_primary_featured_content->target_id)){
+    $exclude[] = $node->field_primary_featured_content->target_id;
+  }
+  if(isset($node->field_secondary_featured_content->target_id)){
+    $exclude[] = $node->field_secondary_featured_content->target_id;
+  }
+  if(isset($node->field_tertiary_featured_content->target_id)){
+    $exclude[] = $node->field_tertiary_featured_content->target_id;
+  }
+  return $exclude;
+}
+
+/**
+ * Get nids of most recent article for each category
+ */
+function zeus_get_homepage_cat_articles($node, $exclude = array()){
+  $cat_articles = array();
+  $categories = zeus_get_categories();
+  foreach($categories as $category){
+    //get sub categories too and store all in single array
+    $query = Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', 'categories')
+      ->condition('parent', $category);
+    $subs = $query->execute();
+    $subs[] = $category;
+    $subs_and_parent = $subs;
+    //now get most recent article in category
+    $query = Drupal::entityQuery('node')
+      ->condition('type', 'article')
+      ->condition('field_category', $subs_and_parent, 'IN')
+      ->condition('nid', $exclude, 'NOT IN')
+      ->condition('status', '1')
+      ->sort('field_publication_date', 'DESC')
+      ->range(0, 1);
+    $nids = $query->execute();
+    if(!empty($nids)){
+      $cat_articles[] = reset($nids);
+    }
+  }
+  return $cat_articles;
+}
+
+/**
+ * Returns top-level category tids
+ */
+function zeus_get_categories(){
+  $query = Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', 'categories')
+    ->condition('parent', 0);
+  $tids = $query->execute();
+  return $tids;
+}
+
+/**
+ * Builds render array for a category grid row on homepage
+ */
+function zeus_home_page_grid($cat_articles, $offset = 0){
+  $cat_articles_string = implode('+', $cat_articles);
+  $args = [$cat_articles_string];
+  $view = Views::getView('category_grid');
+  if (is_object($view)) {
+    $view->setArguments($args);
+    $view->setDisplay('embed_1');
+    $view->setOffset($offset);
+    $view->preExecute();
+    $view->execute();
+    $grid = $view->buildRenderable('embed_1', $args);
+  }
+  return $grid;
+}
+
+/**
+ * Make print icon for addtoany
+ */
+function zeus_preprocess_addtoany_standard(&$variables){
+  $renderable = ['#theme' => 'ppb_print'];
+  $variables['print'] = \Drupal::service('renderer')->render($renderable);
+}
+
+/**
+ *  Add theme hook per view mode for taxonomy terms
+ *  https://www.drupal.org/project/drupal/issues/2767243#comment-12725020
+ */
+function zeus_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+function zeus_preprocess_taxonomy_term(&$variables){
+  if($variables['view_mode'] == 'header_block'){
+    $term = $variables['term'];
+    $variables['attributes']['class'][] = Html::cleanCssIdentifier(strtolower($term->getName()));
+    if(isset($term->field_alignment->value)){
+      $variables['alignment'] = $term->field_alignment->value;
+    }
+  }
+}
+
+// Preprocess function prints tags that may be interted in the field. Specifically break tags.
+function zeus_preprocess_field(&$variables, $hook) {
+  switch ($variables['element']['#field_name']) {
+    case 'field_headline':
+      $variables['field_headline'] = $variables['items'][0]['content']['#context']['value'];
+      break;
+  }
+}
+
+
+function zeus_preprocess_paragraph(&$variables){
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+  switch ($bundle) {
+    case 'campaign_body':
+    case 'campaign_share':
+    case 'customizable_article_teaser':
+      $variables['attributes']['class'][] = 'container';
+  }
+}
+
+function zeus_preprocess_paragraph__campaign_share(&$variables){
+  //Goes around the AddToAny framework becuase I don't want to
+  //have to do any really nasty templating or extensions
+  $icons = [
+    'facebook',
+    'twitter',
+  ];
+  foreach($icons as $icon){
+    $renderable = ['#theme' => 'ppb_' . $icon];
+    $variables[$icon] = \Drupal::service('renderer')->render($renderable);
+  }
+
+  $variables['#attached']['library'][] = 'ppb_social/ppb-social';
+
+}
+
+/**
+ * Pull default values from referenced article if needed
+ */
+function zeus_preprocess_paragraph__customizable_article_teaser(&$variables){
+  $paragraph = $variables['paragraph'];
+  $nid = $variables['paragraph']->field_cta_article->target_id;
+  $node = Node::load($nid);
+  $variables['url'] = $node->toUrl();
+  if(!isset($paragraph->field_zeus_headline->value) || $paragraph->field_zeus_headline->value == ''){
+    $variables['default_title'] = [
+      '#type' => 'plain_text',
+      '#plain_text' => $node->label(),
+    ];
+  }
+
+  if(!isset($paragraph->field_zeus_body->value) || $paragraph->field_zeus_body->value == ''){
+    if(isset($node->field_summary->value)){
+      $variables['default_summary'] = [
+        '#type' => 'processed_text',
+        '#format' => $node->field_summary->format,
+        '#text' => $node->field_summary->value,
+      ];
+    }
+  }
+
+  if(!isset($paragraph->field_zeus_image->target_id)){
+    if(isset($node->field_hero_image->target_id)){
+      $media = Media::load($node->field_hero_image->target_id);
+      $render = \Drupal::entityTypeManager()->getViewBuilder('media')->view($media, 'blazy_teaser');
+      $variables['default_image'] = $render;
+    }
+  }
+
+}
+
+function zeus_preprocess_media__pdf(&$variables){
+  $url = File::load($variables['media']->field_media_file->target_id)->url();
+  $variables['pdf_url'] = $url;
+}
+
+function zeus_preprocess_paragraph__pdf(&$variables){
+  $paragraph = $variables['paragraph'];
+  if (isset($paragraph->field_hide_desktop_cta->value) && $paragraph->field_hide_desktop_cta->value == 1) {
+    $variables['hide_on_desktop'] = TRUE;
+  }
+}

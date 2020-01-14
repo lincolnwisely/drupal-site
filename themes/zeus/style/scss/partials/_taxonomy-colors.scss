@@ -1,0 +1,68 @@
+//Nav colors
+//default color: in case term name gets messed up
+#block-mainnavigation ul.menu li {
+  > a.is-active {
+    @include bp(sm){
+      color: $color-category-default;
+    }
+  }
+
+  &.open {
+    > a {
+      @include bp(sm){
+        color: $color-category-default;
+      }
+    }
+    .secondary-menu-container {
+      background-color: $color-category-default;
+    }
+  }
+}
+
+@each $cat, $cat-color in $category-color-map {
+  #block-mainnavigation ul.menu li.#{$cat} {
+    > a.is-active {
+      @include bp(sm){
+        color: $cat-color;
+      }
+    }
+
+    &.open {
+      > a {
+        @include bp(sm){
+          color: $cat-color;
+        }
+      }
+      .secondary-menu-container {
+        background-color: $cat-color;
+      }
+    }
+  }
+}
+
+//Category links!
+%category-label-link {
+  font-size: 0.78rem;
+  text-decoration: none;
+  font-family: $primary-font-bold;
+  @include bp(sm){
+    font-size: 0.833rem;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+//Fallback for if term name gets messed up
+.topic a {
+  @extend %category-label-link;
+  color: $color-category-default;
+}
+
+//colors for expected terms
+@each $cat, $cat-color in $category-color-map {
+  a.#{$cat} {
+    @extend %category-label-link;
+    color: $cat-color;
+  }
+}

@@ -1,0 +1,15 @@
+.view-search {
+  margin-top: 40px;
+
+  .node--type-article {
+    padding-bottom: 3rem;
+  }
+}
+
+.pager {
+  text-align: center;
+
+  .button {
+    @extend %ppb-button;
+  }
+}

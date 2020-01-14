@@ -1,0 +1,29 @@
+/* Styling for Rich Text Block */
+
+.text-formatted {
+  word-wrap: break-word;
+
+  a {
+    color: $primarygreen;
+  }
+}
+
+.paragraph-rich-text-block {
+  margin: 20px auto;
+  .field-rich-text-block {
+    padding: 40px 18%;
+  }
+}
+
+.field-rich-text-block {
+  padding: 40px 12%;
+  @include bp(sm) {
+    padding: 40px 18%;
+  }
+}
+
+.paragraph-rich-text-content {
+  .field-rich-text-block {
+    padding: 0;
+  }
+}

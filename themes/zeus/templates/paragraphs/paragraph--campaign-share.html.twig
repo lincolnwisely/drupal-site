@@ -1,0 +1,16 @@
+{% extends 'paragraph.html.twig' %}
+
+{% block content %}
+  <div class="row no-gutters">
+    <div class="not-image col-md-7">
+      {{ content.field_zeus_body }}
+      <div class="share">
+        <a class="ppb-social facebook">{{ facebook }}<span>Share on Facebook</span></a>
+        <a class="ppb-social twitter">{{ twitter }}<span>Share on Twitter</span></a>
+      </div>
+    </div>
+    <div class="image col-md-5">
+      {{ content.field_zeus_image }}
+    </div>
+  </div>
+{% endblock %}

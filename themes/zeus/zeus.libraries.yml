@@ -1,0 +1,16 @@
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      style/css/bootstrap-grid.css: {}
+      style/css/style.css: {}
+  js:
+    js/bugherd.js: {}
+    js/scripts.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/jquery.ui
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings

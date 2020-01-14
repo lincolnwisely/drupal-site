@@ -1,0 +1,231 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  overflow-y: scroll;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.clearfix {
+  clear: both;
+}
+
+body {
+  font-family: $secondary-font-regular;
+  font-size: 18px;
+  background: $white;
+  color: $darkgray;
+  margin: 0;
+}
+
+p,
+.text-formatted li { //don't get li's in the menu for example
+  font-size: 0.833rem;
+  line-height: 1.333rem;
+  margin-top: 0;
+  margin-bottom: 1em;
+
+  @include bp(md) {
+    font-size: 1rem;
+    line-height: 1.667rem;
+  }
+}
+
+.page-title {
+  text-align: center;
+}
+
+main {
+  position: relative;
+}
+
+// Added to main element when nav is hovered...
+div#overlay {
+  background: $darkgray;
+  opacity: .8;
+  position: absolute;
+  height: calc(100% + 402px);
+  width: 100vw;
+  top: 0;
+  z-index: 1;
+}
+
+%ppb-button {
+  width: 240px;
+  margin: 0 0 40px 0;
+  font-family: $primary-font-semibold;
+  font-size: 18px;
+  color: $primarygreen;
+  max-width: 240px;
+  padding: 14px 90px;
+  border: 1px solid $primarygreen;
+  text-decoration: none;
+
+  &:hover {
+    color: $white;
+    background: $primarygreen;
+    cursor: pointer;
+  }
+}
+
+.field--name-field-zeus-image {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+h1,
+.h1 {
+  font-family: $secondary-font-regular;
+  font-size: 1.555rem;
+  line-height: 1.888rem;
+  margin: 1rem 0;
+  font-weight: $font-weight-reg;
+
+  @include bp(md) {
+    font-size: 2.77rem;
+    line-height: 3.33rem;
+  }
+}
+
+h2,
+.h2 {
+  font-family: $secondary-font-regular;
+  font-size: 1.444rem;
+  line-height: 1.2;
+  margin: 0.5em 0;
+
+  @include bp(md) {
+    font-size: 1.444rem;
+    line-height: 1.2;
+  }
+}
+
+h3,
+.h3 {
+  font-family: $primary-font-bold;
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  margin: 0.4rem 0;
+
+
+  @include bp(md) {
+    font-size: 1.444rem;
+    line-height: 1.2;
+  }
+}
+
+h4,
+.h4 {
+  font-family: $secondary-font-regular;
+  font-size: 1rem;
+  margin: 0.4rem 0;
+
+  @include bp(md) {
+    font-size: 1.222rem;
+    line-height: 1.444rem;
+  }
+}
+
+h5,
+.h5 {
+  font-family: $primary-font-bold;
+  font-size: .9rem;
+  margin: 0.4rem 0;
+
+  @include bp(md) {
+    font-size: 1rem;
+    line-height: 1.111rem;
+  }
+}
+
+h6,
+.h6,
+.tag {
+  font-family: $secondary-font-regular;
+  font-size: .777rem;
+  line-height: .888rem;
+  margin: 0.4rem 0;
+
+  @include bp(md) {
+    font-size: 1rem;
+    line-height: 1.111rem;
+    margin: 0.4rem 0;
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+}
+
+ol {
+  list-style: none;
+  counter-reset: li;
+  padding: 0;
+  li {
+    margin-left: 25px;
+    &::before {
+      content: counter(li);
+      counter-increment: li;
+      color: #9b9b9b;
+      display: inline-block;
+      width: 25px; //Should match the width of the before bullet on li
+      margin-left: -25px;
+    }
+  }
+}
+
+.pager {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  .pager__item {
+    display: inline-block;
+    padding: 10px;
+    line-height: 1;
+    @include bp(xs) {
+      padding: 5px;
+      &.pager__item--ellipsis,
+      &.pager__item--previous,
+      &.pager__item--next {
+        padding: 0;
+      }
+    }
+    &.is-active {
+      background: $primaryblue;
+      a {
+        color: $white;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+//Hide play button for video elements. Cross browser.
+
+*::-webkit-media-controls-panel,
+*::-webkit-media-controls-play-button,
+*::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button {
+  display: none!important;
+  -webkit-appearance: none;
+}

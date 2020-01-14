@@ -1,0 +1,33 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    article_type_class ? 'article-type-' ~ article_type_class,
+  ]
+%}
+
+{% if article_type_class == 'video' %}
+  {% set typeText = "Video" %}
+{% elseif article_type_class == 'slideshow' %}
+  {% set typeText = "Guide" %}
+{% else %}
+  {% set typeText = "Article" %}
+{% endif %}
+
+<article {{ attributes.addClass(classes) }} >
+  <div class="card">
+    <div class="row">
+      <div class="image col-4">
+        {{ content.field_hero_image }}
+      </div>
+      <div class="not-image col-8">
+        <h2 class="link-node"><a href="{{ url }}">{{ label }}</a></h2>
+        <div class="type-text"><a href="{{url}}">View {{typeText}}</a></div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{% if content %}
+<div{{ attributes.addClass(classes) }}>
+  <div class="pdf-image">
+    {{ content.field_media_file }}
+  </div>
+  <div class="pdf-download">
+    <a href="{{ pdf_url }}">Download</a>
+  </div>
+</div>
+{% endif %}

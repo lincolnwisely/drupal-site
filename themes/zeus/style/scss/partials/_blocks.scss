@@ -1,0 +1,136 @@
+// Nuanced related content block
+#block-views-block-related-content-related-content {
+
+  //the view title
+  & > h2 {
+    font-family: $primary-font-bold;
+    font-size: 1.222rem;
+    line-height: 1.444rem;
+    margin-bottom: 1.67rem;
+    margin-top: 1rem;
+    text-align: center;
+    @include bp(sm) {
+      margin-top: 0;
+      text-align: left;
+    }
+  }
+
+  .hide-on-mobile {
+    display: none;
+    @include bp(sm) {
+      display: block;
+    }
+  }
+}
+
+// Rando mobile 'You May Also Like' content that is inserted via JS
+#related-content-mobile {
+  display: block;
+  @include bp(sm) {
+    display: none;
+  }
+  border-top: 1px solid $gray3;
+  border-bottom: 1px solid $gray3;
+  margin: 20px 0;
+
+  //the view title
+  & > h2 {
+    font-family: $primary-font-bold;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  article {
+    margin-bottom: 10px;
+    a {
+      margin-bottom: 0;
+    }
+  }
+
+  .image {
+    display: none;
+  }
+}
+
+
+// Categories print as block via custom module
+#block-ppbcategoriesblock {
+  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+
+  a {
+    font-size: 0.875rem;
+    @include bp(sm){
+      font-size: 1rem;
+    }
+    margin: 0 0.25rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.sub-category {
+      color: $lightgray;
+      font-family: $primary-font-bold;
+    }
+  }
+
+}
+
+#block-ppbhomepagenavctablock {
+  clear: both;
+  margin: 20px 15px 0;
+  border-bottom: 1px solid $gray3;
+  opacity: 1;
+  transition: opacity .25s;
+
+  &.fade {
+    opacity: 0;
+    transition: opacity .25s;
+  }
+
+  h3 {
+    font-family: $primary-font-regular;
+    font-size: .777rem;
+    font-weight: $font-weight-reg;
+    line-height: 1.5;
+    text-align: center;
+
+  }
+
+  a {
+    font-family: $secondary-font-regular;
+    font-size: .833rem;
+    display:  none;
+  }
+
+  @include bp(sm){
+    display: block;
+    margin-bottom: 30px;
+    border-bottom: none;
+
+    h3 {
+      font-size: 2.111rem;
+      line-height: 1.2;
+      margin: 0 0 30px 0;
+      text-align: left;
+      margin-top: -10px;
+    }
+
+    a {
+      display: inline-block;
+    }
+  }
+
+
+  .container {
+    text-align: center;
+  }
+}
+
+.path-link-in-bio #block-zeus-page-title {
+  display: none;
+}

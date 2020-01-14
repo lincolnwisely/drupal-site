@@ -1,0 +1,46 @@
+/* Tabs CSS
+ * --------
+ * Adds styles for the primary and secondary tabs.
+ *
+ * Compare this with default CSS found in the system module's stylesheet (a copy
+ * of which is in drupal5-reference.css, line 510.) */
+body.not-logged-in #block-tabs {
+  display: none;
+}
+
+#block-tabs {
+  margin-top: 15px;
+  display: block;
+  overflow: auto;
+}
+
+div.tabs {
+  margin: 1em 0;
+}
+ul.tabs {
+  list-style: none;
+  padding: 0;
+}
+.tabs > li {
+  display: inline-block;
+  margin-right: 0.3em; /* LTR */
+}
+[dir="rtl"] .tabs > li {
+  margin-left: 0.3em;
+  margin-right: 0;
+}
+.tabs a {
+  color: $black;
+  display: block;
+  padding: 0.2em 1em;
+  text-decoration: none;
+}
+.tabs a.is-active {
+  color: $white;
+  background-color: $primaryblue;
+}
+.tabs a:focus,
+.tabs a:hover {
+  color: $white;
+  background-color: $primarygreen;
+}

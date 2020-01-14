@@ -1,0 +1,81 @@
+/* Styling for PPB Footer */
+
+footer {
+  background: #F2F2F2;
+  color: $white;
+  position: relative;
+  bottom: 0;
+  #block-footertop {
+    position: relative;
+    padding: 3em 0 2em;
+    p {
+      font-size: 0.77rem;
+      line-height: 1.3rem;
+      color: $darkgray;
+    }
+  }
+  #block-footer {
+    background: $primarygreen;
+    padding: 2em 0;
+    .footer-logo {
+      margin-bottom: 30px;
+      img {
+        width: 100%;
+        max-width: 184px;
+      }
+      @include bp(sm){
+        margin-bottom: 0;
+        text-align: right;
+      }
+    }
+  }
+  .social-icons {
+    display: inline-block;
+    margin-bottom: 28px;
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 18px;
+      @include bp(sm) {
+        margin-right: 30px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      &:hover svg g{
+        fill: $primarygreen;
+      }
+    }
+  }
+
+  .character-logos {
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+      font-family: $primary-font-semibold;
+      font-size: 14px;
+      line-height: 36px;
+      margin-right: 32px;
+      @include bp(sm) {
+        font-size: 16px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+  .copyright p {
+    opacity: .75;
+    margin: 0 auto;
+    font-size: 10px;
+    line-height: 15px;
+  }
+}

@@ -1,0 +1,70 @@
+.paragraph--type--campaign-body {
+  padding-top: 2rem;
+  border-top: 1px solid $darkgray;
+}
+
+.page-node-type-campaign #block-zeus-page-title {
+  display: none;
+}
+
+.paragraph--type--campaign-share {
+
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    font-family: $primary-font-regular;
+  }
+
+  .share {
+    cursor: pointer;
+    a {
+      font-family: $primary-font-bold;
+      color: $primarygreen;
+      margin: 0 1rem 1rem 0;
+      display: inline-block;
+      font-size: 0.875rem;
+      &:hover {
+        text-decoration: underline;
+        svg g {
+          fill: $primarygreen;
+        }
+      }
+    }
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  .not-image {
+    @include bp(sm){
+      padding: 1rem;
+      background-color: #F2F2F2;
+    }
+  }
+
+  .image {
+    background-color: $lightgray;
+    line-height: 0;
+    @include bp(sm){
+      & * {
+        //divs that are wrapping image stuff
+        height: 100%;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+        @include prefix(object-fit, cover, webkit ms o);
+      }
+    }
+  }
+}
+
+.node--type-campaign {
+  .field--name-field-page-layout {
+    & > .field__item {
+      margin-bottom: 1rem;
+    }
+  }
+}

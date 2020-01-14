@@ -1,0 +1,19 @@
+name: Zeus
+type: theme
+description: A custom theme built for Manifest - Zeus enviorment.
+base theme: classy
+core: 8.x
+libraries:
+  - zeus/global-styling
+stylesheets-remove:
+  - core/assets/vendor/normalize-css/normalize.css
+  - core/themes/classy/css/components/menu.css
+  - core/themes/classy/css/components/tabs.css
+ckeditor_stylesheets:
+  - ckeditor.css
+regions:
+  header: Header
+  main_menu: Menu
+  content: Content
+  footer: Footer
+  disabled: Disabled

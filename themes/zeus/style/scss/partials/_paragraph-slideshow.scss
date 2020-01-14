@@ -1,0 +1,265 @@
+#slideshow {
+  position: relative;
+  @include bp(sm) {
+    margin-bottom: 50px;
+  }
+  #cover {
+    position: relative;
+    padding-bottom: 90px;
+
+    @include bp(sm) {
+      padding-bottom: 0;
+      // Gradient is only on desktop.
+      &::before {
+        content: '';
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, #000 100%);
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: -5px;
+        opacity: .6;
+      }
+    }
+    &:after {
+      content: 'Start Slideshow';
+      text-align: center;
+      width: 100%;
+      height: 46px;
+      border: 2px solid $primarygreen;
+      @include prefix(display, flex, webkit ms);
+      @include prefix(align-items, center, webkit ms);
+      @include prefix(justify-content, center, webkit ms);
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      @include prefix(transform, translateX(-50%), webkit ms);
+      font-family: $primary-font-bold;
+      color: $primarygreen;
+
+      @include bp(sm) {
+        width: 431px;
+        height: 86px;
+        color: $white;
+        border: 2px solid $white;
+        bottom: 20%;
+      }
+    }
+  }
+
+  .paragraph--type--slide {
+    @include prefix(display, flex, webkit ms);
+    @include prefix(flex-direction, column, webkit ms);
+
+
+    @include bp(sm) {
+      @include prefix(flex-direction, row, webkit ms);
+      .field--name-field-slide-image {
+        width: 60%
+      }
+
+      .field--name-field-description {
+        width: 40%;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      @include prefix(object-fit, cover, webkit ms o);
+      height: auto;
+
+      @include bp(sm) {
+        width: 100%;
+      }
+    }
+
+    .paragraph--type--zeus-text {
+      padding: 0 15px;
+      @include bp(sm) {
+        border-left: unset;
+        border-right: unset;
+      }
+      .container {
+        padding: 0;
+      }
+      @include bp(sm) {
+        padding: 0px 45px 10px 30px
+      }
+
+      h5 {
+        font-size: .7rem;
+        color: $lightgray;
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+  .container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+// SLICK SLIDER OVERRIDES
+.slick-slider {
+  position: relative;
+
+  .slick-list {
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+
+    @include bp(sm) {
+      border-left: unset;
+      border-right: unset;
+    }
+  }
+
+  // Good for white space control, bad for usability.
+  // Maybe set slide buttons a set distance from top of slider rather than middle aligned.
+  // Mobile only? Might be better for usability on mobile in fact, prevent user from scrolling up and down to get to next slide.
+  .slick-slide {
+    height: 0;
+    &.slick-current.slick-active {
+      height: 100%;
+    }
+  }
+}
+
+nav.slick__arrow {
+  margin-bottom: 40px;
+  display: flex;
+
+  @include bp(sm) {
+    margin-bottom: 0;
+  }
+}
+
+button.slick-arrow {
+  position: unset;
+  width: 100%;
+  color: transparent;
+  box-shadow: 0px 3px 3px -2px #eee;
+  border: 1px solid #eee;
+  height: 50px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+
+  @include bp(sm) {
+    border: none;
+    box-shadow: unset;
+    position: absolute;
+    padding: 0;
+    height: 120px;
+    background: rgba(242,242,242, 0.7);
+    // Set arrows fixed height from top of container. Keeps them in place when height of slide changes.
+    top: 150px;
+    width: 60px;
+    // @include prefix(transform, translateY(-50%), webkit ms);
+    margin-left: 0px;
+  }
+
+  &.slick-prev {
+    @include prefix(display, flex !important, webkit ms);
+    @include prefix(flex-direction, row-reverse, webkit ms);
+    @include prefix(justify-content, center, webkit ms);
+    @include prefix(align-items, center, webkit ms);
+
+    &:after {
+      content: '';
+      display: inline-block;
+      border-right: 2px solid #2FA491;
+      border-bottom: 2px solid #2FA491;
+      padding: 4px;
+      margin-left: 20px;
+      height: 10px;
+      width: 10px;
+      @include prefix(transform, rotate(-230deg), webkit ms);
+
+      @include bp(sm) {
+        // Completely different content on mobile vs. desktop
+        content: '';
+        display: block;
+        border-right: 3px solid $gray;
+        border-bottom: 3px solid$gray;
+        padding: 10px;
+        margin-left: 15px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    &:before {
+      // Completely different content on mobile vs. desktop
+      content: 'Previous';
+      display: inline-block;
+      width: 100px;
+      color: $primarygreen;
+      font-family: $primary-font-bold;
+      font-size: .9rem;
+      @include bp(sm) {
+        content: none;
+      }
+    }
+  }
+
+  &.slick-next {
+    @include bp(sm) {
+      right: -40px;
+    }
+    &:after {
+      content: '';
+      display: inline-block;
+      border-right: 2px solid #2FA491;
+      border-bottom: 2px solid #2FA491;
+      padding: 4px;
+      margin-left: -25px;
+      width: 10px;
+      height: 10px;
+      @include prefix(transform, rotate(-46deg), webkit ms);
+
+      @include bp(sm) {
+        // Completely different content on mobile vs. desktop
+        content: '';
+        display: block;
+        border-right: 3px solid $gray;
+        border-bottom: 3px solid$gray;
+        padding: 10px;
+        margin-left: 15px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    &:before {
+      // Completely different content on mobile vs. desktop
+      content: 'Next';
+      display: inline-block;
+      width: 100px;
+      color: $primarygreen;
+      font-family: $primary-font-bold;
+      font-size: .9rem;
+      @include bp(sm) {
+        content: none;
+      }
+    }
+
+  }
+
+  &.slick-disabled {
+    display: none !important;
+    // Override inline css
+  }
+
+  &:focus,
+  &:active {
+    outline: 1px solid $lightgray;
+    @include bp(sm) {
+      outline: 2px solid $lightgray;
+    }
+  }
+}
+// Toggled when cover image is clicked.
+.slick {
+  display: none;
+}

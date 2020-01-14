@@ -1,0 +1,12 @@
+{% extends 'paragraph.html.twig' %}
+
+
+{% block content %}
+  <div class="paragraph-content">
+    {% if  content.field_zeus_headline %}
+    <p><strong>{{ content.field_zeus_headline }}</strong></p>
+
+    {% endif %}
+    {{ content.field_video_embed }}
+  </div>
+{% endblock %}

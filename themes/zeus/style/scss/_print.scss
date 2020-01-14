@@ -1,0 +1,8 @@
+@media print {
+  header,
+  #addtoany-dd,
+  footer,
+  #related-dd {
+    display: none;
+  }
+}

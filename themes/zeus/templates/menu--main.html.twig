@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <h2 class="d-md-none">Discover everything you can accomplish with paper and packaging.</h2>
+      <ul{{ attributes.addClass('menu') }}>
+    {% else %}
+      <ul class="menu">
+    {% endif %}
+    {% for item in items %}
+      {%
+        set classes = [
+          'menu-item',
+          item.is_expanded ? 'menu-item--expanded',
+          item.is_collapsed ? 'menu-item--collapsed',
+          item.in_active_trail ? 'menu-item--active-trail',
+          item.title|clean_class,
+          item.tid
+        ]
+      %}
+      <li{{ item.attributes.addClass(classes) }}>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+        {% set tid = item.tid %}
+        <div class="secondary-menu-container">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="21px" viewBox="0 0 10 16" version="1.1">
+              <defs>
+                <polygon id="path-1" points="9.725 1.496 8.25 0.08 0 8 8.25 15.92 9.725 14.504 2.95 8"/>
+              </defs>
+              <g id="Nav-+-Search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Navigation-Mobile-Category-" transform="translate(-26.000000, -33.000000)">
+                  <g id="ic_arrow_back_ios_24px" transform="translate(26.000000, 33.000000)">
+                    <mask id="mask-2" fill="white">
+                      <use xlink:href="#path-1"/>
+                    </mask>
+                    <use id="Shape" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </span>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="left-content">
+                  <h2 class="headline">{{item.field_headline|raw}}</h2>
+                  <h5>Visit {{ link(item.title, item.url) }}</h5>
+                  {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+                </div>
+              </div>
+              <div class="col-md-6 right">
+                <h5>What's New</h5>
+                <dd>{{ drupal_view('taxonomy_term', 'menu_hover', tid)}}</dd>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

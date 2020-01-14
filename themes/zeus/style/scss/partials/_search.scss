@@ -1,0 +1,209 @@
+.open-search {
+  background: url(../../images/search-white.png);
+  width: 23px;
+  height: 22px;
+
+  @include bp(sm) {
+    background: url(../../images/search-gray.png);
+    width: 18px;
+    height: 18px;
+  }
+  #block-secondarynaviagtion & {
+    display: inline-block;
+  }
+  .region-menu & {
+    display: none;
+    position: fixed;
+    left: 7%;
+    bottom: 5%;
+    z-index: 2;
+    &.open-sesame {
+      display: block;
+    }
+  }
+  cursor: pointer;
+}
+
+#block-searchblock {
+  position: fixed;
+  z-index: 9;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  &.on-search-page {
+    top: 0;
+    bottom: unset;
+    background-color: $primarygreen;
+    height: 101px;
+  }
+  @include bp(sm) {
+    height: 135px;
+    background-color: $primarygreen;
+    bottom: unset;
+    top: 0;
+    &.on-search-page {
+      height: 165px;
+    }
+  }
+
+  .search-count {
+    color: $darkgray;
+    font-family: $primary-font-regular;
+    width: 86%;
+    max-width: 1440px;
+    margin: auto;
+    @include bp(sm){
+      color: white;
+    }
+  }
+  &.on-search-page .search-count {
+    color: white;
+    margin-top: 20px;
+  }
+
+  form#ppb-nav-search-form {
+    margin: auto;
+    width: 86%;
+    max-width: 1440px;
+    position: relative;
+  }
+
+  .form-item {
+    height: 50px;
+    margin: 0;
+    width: 100%;
+    @include bp(sm){
+      height: 60px;
+    }
+  }
+  input{
+    font-family: $primary-font-regular;
+    font-size: 2rem;
+    line-height: 2.5;
+    border: none;
+    color: $darkgray;
+    background-color: transparent;
+    outline: none;
+    padding-left: 30px;
+
+    @include bp(sm) {
+      color: $white;
+      border-bottom: 1px solid white;
+    }
+  }
+  &.on-search-page input {
+    color: $white;
+    border-bottom: 1px solid white;
+  }
+
+  input.button {
+    display: none;
+  }
+
+  .form-actions {
+    margin: 0;
+
+    @include bp(sm) {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  .form-item-search-api-fulltext{
+    position: relative;
+    &:before {
+      content: '';
+      background: url(../../images/search-gray.png);
+      width: 22px;
+      height: 22px;
+      display: block;
+      position: absolute;
+      background-size: 22px;
+      top: 50%;
+      left: 0;
+      @include prefix(transform, translateY(-50%), webkit ms);
+
+      @include bp(sm) {
+        background: url(../../images/search-white.png);
+        width: 15px;
+        height: 15px;
+        background-size: 15px;
+      }
+    }
+  }
+  &.on-search-page .form-item-search-api-fulltext:before {
+    background: url(../../images/search-white.png);
+    width: 15px;
+    height: 15px;
+    background-size: 15px;
+  }
+}
+
+#exit-search {
+  position: absolute;
+  font-family: $primary-font-regular;
+  color: $primaryblue;
+  display: block;
+  right: 0;
+  top: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  @include prefix(transform, translateY(-50%), webkit ms);
+
+  .mobile {
+    color: $primaryblue;
+    font-family: $primary-font-regular;
+    @include bp(sm){
+      display: none;
+    }
+  }
+  .desktop {
+    display: none;
+    font-family: $primary-font-regular;
+    color: white;
+    @include bp(sm){
+      display: block;
+    }
+  }
+  .on-search-page & .mobile {
+    display: none;
+  }
+  .on-search-page & .desktop {
+    display: block;
+  }
+
+}
+
+#search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #222;
+  opacity: 0.7;
+  z-index: 9;
+  width: 100%;
+  height: calc(100vh - 80px);
+  @include bp(sm){
+    top: 135px;
+    height: calc(100vh - 135px);
+  }
+  .on-search-page & {
+    top: 101px;
+    height: calc(100vh - 101px);
+    @include bp(sm){
+      top: 165px;
+      height: calc(100vh - 165px);
+    }
+  }
+}
+
+
+// Get rid of all default search field styling.
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration,
+input[type="search"] {
+  -webkit-appearance:none;
+}

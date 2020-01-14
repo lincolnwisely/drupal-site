@@ -1,0 +1,80 @@
+/* Styling for Paper & Packaging */
+@font-face {
+  font-family: 'Open Sans Italic';
+    src: url('../../fonts/OpenSans-Italic-webfont.eot') format('embedded-opentype');
+    src: url('../../fonts/OpenSans-Italic-webfont.ttf') format('truetype');
+    src: url('../../fonts/OpenSans-Italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans SemiBold';
+    src: url('../../fonts/OpenSans-Bold-webfont.eot') format('embedded-opentype');
+    src: url('../../fonts/OpenSans-Bold-webfont.ttf') format('truetype');
+    src: url('../../fonts/OpenSans-Bold-webfont.woff') format('woff');
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Open Sans Regular';
+    src: url('../../fonts/OpenSans-Regular-webfont.eot') format('embedded-opentype');
+    src: url('../../fonts/OpenSans-Regular-webfont.ttf') format('truetype');
+    src: url('../../fonts/OpenSans-Regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans Bold';
+    src: url('../../fonts/OpenSans-Bold-webfont.eot') format('embedded-opentype');
+    src: url('../../fonts/OpenSans-Bold-webfont.ttf') format('truetype');
+    src: url('../../fonts/OpenSans-Bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+
+$secondary-font-regular: 'Merriweather', serif;
+$primary-font-italic: 'Open Sans Italic', 'Helvetica Neue';
+$primary-font-regular: 'Open Sans Regular', 'Helvetica Neue', sans-serif;
+$primary-font-bold: 'Open Sans Bold', 'Helvetica Neue', sans-serif;
+$primary-font-semibold: 'Open Sans SemiBold', 'Helvetica Neue', sans-serif;
+
+
+$font-weight-reg: 400;
+$font-weight-med: 500;
+
+$white: #FFFFFF;
+$darkgray: #4A4A4A;
+$gray: #585858;
+$gray2: #898989;
+$gray3: #949494;
+$lightgray: #9B9B9B;
+$black: #000000;
+$black1: #222;
+$primaryblue: #5A90B5;
+$primarygreen: #00a4a1;
+$orange: #e77312;
+$pea: #77a053;
+$lavender: #8983aa;
+$coral: #ec5553;
+$navy: #094a76;
+
+/**
+ * Category Colors!
+ *
+ * Using this map and an @each block can keep code DRY.
+ * Keeping these colors in one place will make them easier to change and keep track of.
+ */
+$color-category-default: $primarygreen;
+$category-color-map : (
+  business-success: $navy,
+  learning--education: $orange,
+  resource-stewardship: $pea,
+  innovation: $lavender,
+  lifestyle--interests: $coral,
+  personal-productivity: $primaryblue,
+);

@@ -1,0 +1,375 @@
+#block-taxonomyheaderblock {
+  position: relative;
+
+  .taxonomy-term {
+
+    //colors
+    @each $cat, $cat-color in $category-color-map {
+      &.#{$cat} {
+        background-color: $cat-color;
+        @include bp(sm) {
+          background-color: transparent;
+        }
+      }
+    }
+    //default: if term name is messed up
+    background-color: $color-category-default;
+    @include bp(sm) {
+      background-color: transparent;
+    }
+
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+
+    .image {
+      display: none;
+    }
+
+    .not-image {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .headline-wrapper {
+      // width: 86%;
+      // max-width: 750px;
+      text-align: center;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+
+      @include bp(sm){
+        &.left {
+          width: 63%;
+          text-align: left;
+          margin-left: 0;
+        }
+        &.right {
+          width: 63%;
+          text-align: right;
+          margin-right: 0;
+        }
+
+        .headline {
+          width: 80%;
+          margin: 100px auto 0;
+          margin: 0 auto;
+          &.half-width {
+            width: 70%;
+          }
+        }
+
+        .field--name-field-subhead {
+          width: 45%;
+          margin: 0 auto;
+        }
+      }
+
+    }
+
+    h1 {
+      color: $white;
+      margin-top: 0;
+    }
+
+    p {
+      color: $white;
+      font-family: $secondary-font-regular;
+      @include bp(sm) {
+        font-size: .88rem;
+      }
+    }
+
+    //cool stuff to do text over image on desktop
+    @include bp(sm){
+      .card {
+        overflow: hidden;
+        padding: 0;
+      }
+      //the double-wide row is key to making the text-over-image design
+      //pattern really nicely responsive.
+      .row.double-wide {
+        max-width: none;
+        width: 200%;
+        margin: 0;
+      }
+      .not-image {
+        @include prefix(display, flex, webkit ms);
+        position: relative;
+        z-index: 1;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      //there's cool stuff in here to make this really responsive
+      //to variable text over the image. It can grow as tall as it
+      //needs to, but it never shrinks shorter than the image wants to be.
+      //Notice that it does this without any magic numbers.
+      .image {
+        display: block;
+        @include prefix(transform, translateX(-100%), webkit ms);
+        z-index: -1;
+        & * {
+          //divs that are wrapping image stuff
+          height: 100%;
+        }
+        img {
+          height: 100%;
+          width: 100%;
+          @include prefix(object-fit, cover, webkit ms o);
+        }
+        //after element for gray overlay
+      }
+    }
+
+    //The dog-ear
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-left: 30px solid white;
+      right: -5px;
+      top: -20px;
+      position: absolute;
+      @include prefix(transform, rotate(315deg), webkit ms);
+
+      @include bp(sm) {
+        content: none;
+      }
+    }
+    &:after {
+      content: '';
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 30px solid rgba(0, 0, 0, 0.3);
+      position: absolute;
+      right: 17px;
+      top: 2px;
+      @include prefix(transform, rotate(315deg), webkit ms);
+
+      @include bp(sm) {
+        content: none;
+      }
+    }
+  }
+
+  &:after {
+    content: none;
+
+    @include bp(sm){
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 50%;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      border-left: 20px solid white;
+      bottom: -10px;
+      position: absolute;
+      @include prefix(transform, translateX(-50%) rotate(270deg), webkit ms);
+    }
+  }
+}
+
+// Override borrowed styles from view modes:
+.node--view-mode-taxonomy-2up-subcat-teaser,
+.node--view-mode-taxonomy-subcat-teaser {
+  // Fallback until we get the specific subcat taxonomy names
+  .topic a {
+    text-decoration: none;
+    font-family: $primary-font-bold;
+  }
+}
+
+.node--view-mode-taxonomy-2up-subcat-teaser {
+  padding-bottom: 4rem;
+
+  h2 a {
+    font-size: 1.111rem;
+    line-height: 1.555rem;
+
+    @include bp(sm) {
+      font-size: 1.94rem;
+      line-height: 1.18em;
+    }
+  }
+}
+
+.node--view-mode-taxonomy-subcat-teaser {
+  padding-bottom: 4rem;
+
+  h2 a {
+    font-size: 1.111rem;
+    line-height: 1.555rem;
+
+    @include bp(sm) {
+      font-size: 1.333rem;
+      line-height: 1.777rem;
+    }
+  }
+}
+
+// Taxonomy Filter Block.
+.block-ppb-taxfilter-block {
+  position: relative;
+  margin-bottom: 1rem;
+
+  @include bp(sm) {
+    margin-top: 0;
+    .block {
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .taxonomy-filter-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -15px;
+    border-bottom: 1px solid black;
+    @include bp(sm){
+      justify-content: center;
+      border-bottom: none;
+    }
+    //the chevron
+    .filter-text {
+      position: relative;
+      padding-right: 20px;
+      @include bp(sm){
+        display: none;
+      }
+      &:after {
+        content: '';
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-color: inherit;
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        right: 4px;
+        top: 2px;
+        @include prefix(transform, rotateZ(134deg), webkit ms o);
+        transition: all .2s ease-in-out;
+      }
+    }
+  }
+
+  //category colors
+  @each $cat, $cat-color in $category-color-map {
+    &.#{$cat} {
+      .filter-text,
+      .term-select a.active-filter {
+        color: $cat-color;
+      }
+    }
+  }
+  //default: in case term name is messed up
+  .filter-text,
+  .term-select a.active-filter {
+    color: $color-category-default;
+  }
+
+  .taxonomy-filter-header {
+    font-family: $primary-font-bold;
+    margin-bottom: 0;
+    color: $black1;
+    font-size: .777rem;
+    padding: 20px 15px;
+    margin-top: 0;
+    position: relative;
+    cursor: pointer;
+    @include bp(sm){
+      cursor: default;
+    }
+  }
+  //when open, text is white, filter-header has category bg color
+  //and chevron rotates
+  &.open {
+    //NOTE: it's a desktop first media query for this.
+    @include bp(xs){
+      .taxonomy-filter-header {
+        color: white;
+        border-top: 1px solid black;
+        .filter-text {
+          color: white;
+          &:after {
+            //rotate chevron
+            @include prefix(transform, rotateZ(-45deg), webkit ms o);
+            transition: all .2s ease-in-out;
+            top: 6px;
+          }
+        }
+      }
+    }
+    //End of desktop first media query
+
+    //the bg color part
+    @each $cat, $cat-color in $category-color-map {
+      &.#{$cat} {
+        .taxonomy-filter-header {
+          background-color: $cat-color;
+          @include bp(sm){
+            background-color: transparent;
+          }
+        }
+      }
+    }
+    //default: in case term name is messed up
+    .taxonomy-filter-header {
+      background-color: $color-category-default;
+      @include bp(sm){
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.open .term-select {
+    color: $white;
+    @include prefix(display, flex, webkit ms);
+  }
+
+  .term-select {
+    display: none;
+    @include prefix(flex-direction, column, webkit ms);
+    justify-content: space-evenly;
+    list-style: none;
+    padding-bottom: 10px;
+
+    li {
+      padding: 20px 0;
+      border-bottom: 1px solid $lightgray;
+      font-size: .833rem;
+    }
+
+    a {
+      display: block;
+      color: $darkgray;
+      text-decoration: none;
+      font-family: $primary-font-regular;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.active-filter {
+        font-family: $primary-font-bold;
+        color: $color-category-default;
+      }
+    }
+
+    @include bp(sm) {
+      @include prefix(display, flex, webkit ms);
+      @include prefix(flex-direction, row, webkit ms);
+
+      li {
+        padding: 0;
+        border-bottom: none;
+      }
+    }
+  }
+}

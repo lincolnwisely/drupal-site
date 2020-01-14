@@ -1,0 +1,43 @@
+// Override default lazy play icon
+.video-embed-field-lazy-play {
+
+  //override some styles from the module
+  margin-left: 0;
+  margin-top: 0;
+
+  //custom image
+  background-image: url(../../images/video_play.png);
+
+  //custom size
+  background-size: 44px;
+  width: 44px;
+  height: 44px;
+
+  //center with transforms, not margin
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include prefix(transform, translate3d(-50%, -50%, 0), webkit ms);
+
+  @include bp(sm) {
+    background-size: 78px;
+    height: 78px;
+    width: 78px;
+  }
+}
+
+// Small icon even on desktop for paragraph (small) videos
+.paragraph--type--video {
+  margin-bottom: 50px;
+  p {
+    font-family: $primary-font-bold;
+  }
+
+  .video-embed-field-lazy-play {
+    @include bp(sm) {
+      background-size: 44px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+}
