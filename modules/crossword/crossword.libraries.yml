@@ -1,0 +1,42 @@
+crossword.default:
+  css:
+    layout:
+      css/crossword-grid.css: {}
+      css/default.css: {}
+  js:
+    js/classes.js: {}
+    js/crossword.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+
+crossword.solution:
+  css:
+    layout:
+      css/crossword-grid.css: {}
+
+crossword.print:
+  css:
+    layout:
+      css/print.css: {}
+
+crossword.book:
+  css:
+    layout:
+      css/book.css: {}
+
+crossword.screenreader:
+  css:
+    layout:
+      css/crossword-grid.css: {}
+      css/screenreader.css: {}
+  js:
+    js/classes.js: {}
+    js/crossword-screenreader.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings

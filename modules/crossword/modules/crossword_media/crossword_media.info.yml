@@ -1,0 +1,13 @@
+name: Crossword Media
+description: "Integrate Crossword module with core Media."
+package: Crossword
+type: module
+core: 8.x
+dependencies:
+  - crossword:crossword
+  - drupal:media
+
+# Information added by Drupal.org packaging script on 2019-12-25
+version: '8.x-1.0-alpha4'
+project: 'crossword'
+datestamp: 1577300289

@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.crossword.field_crossword
+    - node.type.crossword
+  module:
+    - crossword
+    - user
+id: node.crossword.default
+targetEntityType: node
+bundle: crossword
+mode: default
+content:
+  field_crossword:
+    weight: 101
+    label: above
+    settings:
+      print: true
+      details:
+        title_tag: h1
+        author_tag: h2
+        notepad_tag: p
+      buttons:
+        buttons:
+          cheat: cheat
+          solution: solution
+          clear: clear
+          undo: undo
+          redo: redo
+      errors:
+        show: true
+        checked: false
+      references:
+        show: true
+        checked: true
+    third_party_settings: {  }
+    type: crossword
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

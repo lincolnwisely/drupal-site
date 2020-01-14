@@ -1,0 +1,12 @@
+name: Crossword
+description: "Adds Crossword field that turns uploaded Across Lite text files into playable puzzles."
+package: Crossword
+type: module
+core: 8.x
+dependencies:
+  - drupal:file
+
+# Information added by Drupal.org packaging script on 2019-12-25
+version: '8.x-1.0-alpha4'
+project: 'crossword'
+datestamp: 1577300289

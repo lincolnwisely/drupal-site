@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * default theme implementation to display a set of clues.
+ *
+ * Available variables:
+ * - content : All of the clues in this set
+ * - direction: 'across' or 'down'
+ * - attributes : HTML attributes for the containing element.
+ */
+#}
+<div{{ attributes.addClass('crossword-clues') }}>
+  {% if direction %}
+    <div class="crossword-clues-header">
+      <button class="crossword-clue-change prev" data-dir="{{ direction }}" data-clue-change="-1"></button>
+      <button class="crossword-dir-change" data-dir="{{ direction }}">{{ direction }}</button>
+      <button class="crossword-clue-change next" data-dir="{{ direction }}" data-clue-change="1"></button>
+    </div>
+  {% endif %}
+  <h2 class="clues-heading" hidden aria-hidden="false">{{ direction }}</h2>
+  <ul>
+    {{ content }}
+  </ul>
+</div>

@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * default theme implementation to display a crossword.
+ *
+ * Available variables:
+ * - content : all available pieces of the crossword which may include:
+ *   - title : The title of the crossword as contained in the parsed file.
+ *   - author : The author of the crossword as contained in the parsed file.
+ *   - notepad : Notes contained in the parsed file.
+ *   - controls : Buttons and checkboxes used to interact with the puzzle.
+ *   - grid : The crossword grid as contained in the parsed file.
+ *   - across : The across clues contained in the parsed file.
+ *   - down : The down clues contained in the parsed file.
+ * - attributes : HTML attributes for the containing element.
+ */
+#}
+<div{{ attributes.addClass('crossword') }}>
+
+  <div class="crossword-header">
+    {% if content.title is not empty or content.author is not empty or content.notepad is not empty %}
+      <div class="crossword-details">
+        {{ content.title }}
+        {{ content.author }}
+        {{ content.notepad }}
+      </div>
+    {% endif %}
+    {{ content.controls }}
+  </div>
+
+  <div id="solution-message" aria-hidden="true" hidden tabindex="1">
+    {% trans %}Congratulations! You have solved the crossword puzzle.{% endtrans %}
+  </div>
+
+  <div class="crossword-puzzle clearfix">
+    {{ content.grid }}
+    {{ content.across }}
+    {{ content.down }}
+    <div>
+      <button id="crossword-blank-count">Go to first clue</button>
+    </div>
+  </div>
+
+</div>

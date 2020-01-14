@@ -1,0 +1,13 @@
+services:
+  crossword.manager.parser:
+    class: Drupal\crossword\CrosswordFileParserManager
+    parent: default_plugin_manager
+  crossword.image_factory:
+    class: Drupal\crossword\CrosswordImageFactory
+    arguments: ['@file_system', '@crossword.manager.parser']
+  cache.crossword:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [crossword]

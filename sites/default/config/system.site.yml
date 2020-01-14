@@ -1,0 +1,14 @@
+uuid: 60a2fcc7-02be-424d-913d-205c2eeaf1a0
+name: 'Lincoln Drupal'
+mail: lincolnwisely@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE

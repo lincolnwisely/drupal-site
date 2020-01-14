@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_crossword
+    - node.type.crossword
+  module:
+    - crossword
+id: node.crossword.field_crossword
+field_name: field_crossword
+entity_type: node
+bundle: crossword
+label: Crossword
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt puz'
+  max_filesize: ''
+  description_field: false
+  allowed_parsers:
+    across_lite_text: false
+    across_lite_puz: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: crossword

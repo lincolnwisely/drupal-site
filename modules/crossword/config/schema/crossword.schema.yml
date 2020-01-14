@@ -1,0 +1,95 @@
+# Schema for the configuration for crossword module
+
+field.storage_settings.crossword:
+  type: base_entity_reference_field_settings
+  label: 'File settings'
+  mapping:
+    display_field:
+      type: boolean
+      label: 'Enable Display field'
+    display_default:
+      type: boolean
+      label: 'Files displayed by default'
+    uri_scheme:
+      type: string
+      label: 'Upload destination'
+
+field.value.crossword:
+  type: mapping
+  label: 'Default value'
+
+field.field_settings.crossword:
+  type: base_file_field_field_settings
+  label: 'File settings'
+  mapping:
+    description_field:
+      type: boolean
+      label: 'Enable Description field'
+    allowed_parsers:
+      type: sequence
+      label: 'Allowed Parsers'
+      sequence:
+        type: boolean
+
+field.formatter.settings.crossword:
+  type: mapping
+  mapping:
+    print:
+      type: boolean
+      label: 'Include Print Stylesheet'
+    details:
+      type: mapping
+      label: 'Details'
+      mapping:
+        title_tag:
+          type: string
+          label: 'Title Tag'
+        author_tag:
+          type: string
+          label: 'Author Tag'
+        notepad_tag:
+          type: string
+          label: 'Notepad Tag'
+    buttons:
+      type: mapping
+      mapping:
+        buttons:
+          type: mapping
+          mapping:
+            cheat:
+              type: string
+              label: 'Cheat'
+            solution:
+              type: string
+              label: 'Solution'
+            clear:
+              type: string
+              label: 'Clear'
+            undo:
+              type: string
+              label: 'Undo'
+            redo:
+              type: string
+              label: 'Redo'
+    errors:
+      type: mapping
+      label: 'Errors'
+      mapping:
+        show:
+          type: boolean
+          label: 'Show'
+        checked:
+          type: boolean
+          label: 'Checked'
+    references:
+      type: mapping
+      label: 'References'
+      mapping:
+        show:
+          type: boolean
+          label: 'Show'
+        checked:
+          type: boolean
+          label: 'Checked'
+
+

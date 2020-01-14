@@ -1,0 +1,72 @@
+.crossword {
+  position: relative;
+}
+
+.crossword-title {
+  margin-top: 0;
+}
+
+.crossword-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.crossword-controls .form-item {
+  margin-top: 0;
+}
+
+.crossword-controls button {
+  padding: 0.25em;
+  text-transform: capitalize;
+}
+
+.crossword-controls label {
+  display: inline;
+}
+
+.crossword-buttons > div {
+  margin-bottom: 1em;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.crossword-clues ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.crossword-clues-header {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  text-transform: uppercase;
+}
+
+.crossword-clues-header button {
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.crossword-clue .numeral {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.crossword-clue.cheat,
+.crossword-square.cheat .square-fill {
+  font-style: italic;
+}
+
+.crossword-buttons label {
+  font-weight: normal;
+  display: inline;
+}
