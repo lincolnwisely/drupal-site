@@ -5,7 +5,6 @@ global-styling:
       style/css/bootstrap-grid.css: {}
       style/css/style.css: {}
   js:
-    js/bugherd.js: {}
     js/scripts.js: {}
   dependencies:
     - core/jquery

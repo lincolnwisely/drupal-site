@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap');
+
+$serif: 'Source Serif Pro', serif;
+
+$navy: #0f246f;
+$orangered: #ff490c;
+$olive:  #3a5c37;
+$black: #222;
+$white: #fff;
+
+/**
+ *  Colors!
+ *
+ * Using this map and an @each block can keep code DRY.
+ * Keeping these colors in one place will make them easier to change and keep track of.
+ */
+ $color-default: $orangered;
+ $cta-color-map : (
+   navy: $navy,
+   orangered: $orangered,
+   olive: $olive,
+   black: $black
+ );
+ 

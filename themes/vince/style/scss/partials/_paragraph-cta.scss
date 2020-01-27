@@ -1,0 +1,24 @@
+.row-reverse {
+  flex-direction: row-reverse; 
+}
+
+/* Colors */
+
+@each $class, $class-color in $cta-color-map {
+  .paragraph--type--cta.#{$class} {
+    a {
+      background-color: transparent;
+      color: $class-color;
+    }
+
+    &.is-button {
+      a {
+        background-color: $class-color;
+        color: $white;
+        padding: 5px 7px;
+        border-radius: 1px;
+        display: inline-block;
+      }
+    }
+  }
+}

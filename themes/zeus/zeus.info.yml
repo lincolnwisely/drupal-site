@@ -1,6 +1,6 @@
 name: Zeus
 type: theme
-description: A custom theme built for Manifest - Zeus enviorment.
+description: A custom theme built for PPL - Zeus enviorment.
 base theme: classy
 core: 8.x
 libraries:

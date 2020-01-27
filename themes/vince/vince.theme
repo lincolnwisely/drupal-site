@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Zeus custom theme.
+ */
+ 
+ function vince_preprocess_paragraph(&$variables){
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  switch ($bundle) {
+    case 'card':
+      // kint($variables.content.field_layout.values);
+      // print $variables->field_layout->value;
+      $layout = $paragraph->get('field_layout')->value;
+      // print $layout;
+      switch ($layout) {
+        case 'inline_1': 
+
+        case 'inline_2': 
+        $variables['attributes']['class'][] = 'row-reverse';
+        break;
+
+        case 'stacked': 
+        $variables['attributes']['class'][] = 'flex-column';
+        break;
+      }
+  }
+}

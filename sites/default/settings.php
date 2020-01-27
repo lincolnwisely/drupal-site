@@ -89,7 +89,16 @@
  * @endcode
  */
 $databases = [];
-
+$databases['default']['default'] = [
+  'database' => 'linccarl_lincoln_drupal',
+  'username' => 'linccarl_lincolnwisely',
+  'password' => 'VinceCL69',
+  'host' => 'localhost',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+  'collation' => 'utf8mb4_general_ci',
+];
 /**
  * Customizing database settings.
  *
@@ -237,7 +246,7 @@ $databases = [];
  * directory in the public files path. The setting below allows you to set
  * its location.
  */
-$settings['config_sync_directory'] = 'sites/default/files/config';
+$settings['config_sync_directory'] = 'sites/default/config';
 
 /**
  * Settings:
@@ -266,7 +275,7 @@ $settings['config_sync_directory'] = 'sites/default/files/config';
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'okbutwhy';
 
 /**
  * Deployment identifier.
